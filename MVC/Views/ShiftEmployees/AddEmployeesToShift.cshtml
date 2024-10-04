@@ -1,0 +1,45 @@
+﻿@model DataAccessLayer.Models.Shift
+
+@{
+    ViewBag.Title = "Add Employees to Shift";
+}
+
+<h2>Add Employees to Shift</h2>
+
+@using (Html.BeginForm("AddEmployees", "ShiftEmployees", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.Label("Shift")
+        @Html.DropDownList("ShiftID", (SelectList)ViewBag.Shifts, new { @class = "form-control", @disabled = "disabled" })
+        @Html.Hidden("ShiftID", ((SelectList)ViewBag.Shifts).FirstOrDefault()?.Value)
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Employees")
+        @foreach (var employee in (IEnumerable<SelectListItem>)ViewBag.Employees)
+        {
+            <div>
+                <input type="checkbox" name="EmployeeIDs" value="@employee.Value" />
+                @employee.Text
+            </div>
+        }
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Number of Employees")
+        <input type="number" name="NumberOfEmployees" class="form-control" min="1" value="1" required />
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Shift Location")
+        <input type="text" name="ShiftLocation" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Add Employees" class="btn btn-primary" />
+    </div>
+}
+
+

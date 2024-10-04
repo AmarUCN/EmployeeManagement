@@ -1,0 +1,44 @@
+﻿@model IEnumerable<dynamic>
+
+<h2>Shift List</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No shifts found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Salary</th>
+                <th>Job Place</th>
+                <th>Add Employees</th> 
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Shift.HoursStart</td>
+                    <td>@item.Shift.HoursEnd</td>
+                    <td>@item.Shift.Salary</td>
+                    <td>@item.JobPlace</td>
+                    <td>
+                        <a href="@Url.Action("AddEmployeesToShift", "ShiftEmployees", new { shiftID = item.Shift.Id })">Add Employees</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

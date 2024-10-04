@@ -1,0 +1,45 @@
+﻿@model DataAccessLayer.Models.Shift
+
+<h2>Create Shift</h2>
+
+<h4>Shift</h4>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoursStart)
+        @Html.TextBoxFor(model => model.HoursStart, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.HoursStart)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.HoursEnd)
+        @Html.TextBoxFor(model => model.HoursEnd, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.HoursEnd)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Salary)
+        @Html.TextBoxFor(model => model.Salary, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Salary)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.JobID, "Job")
+        @Html.DropDownListFor(model => model.JobID, (SelectList)ViewBag.Job, "Select a job", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.JobID)
+    </div>
+
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

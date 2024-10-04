@@ -1,0 +1,36 @@
+﻿@model IEnumerable<dynamic>
+
+<h2>Job List</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No jobs found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Place</th>
+                <th>Department</th>
+                <th>Company Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Job.Place</td>
+                    <td>@item.Job.Department</td>
+                    <td>@item.CompanyName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

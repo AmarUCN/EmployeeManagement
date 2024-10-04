@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DataAccessLayer.Models.Company>
+
+<h2>Company List</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No companys found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Comapany name</th>
+                <th>Company location</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CompanyName</td>
+                    <td>@item.CompanyLocation</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

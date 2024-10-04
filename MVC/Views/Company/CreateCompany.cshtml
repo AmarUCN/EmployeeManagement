@@ -1,0 +1,40 @@
+﻿@model DataAccessLayer.Models.Company
+
+<h2>Create Company</h2>
+
+<h4>Company</h4>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyName)
+        @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CompanyName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CompanyLocation)
+        @Html.TextBoxFor(model => model.CompanyLocation, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CompanyLocation)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AdministratorID, "Administrator")
+        @Html.DropDownListFor(model => model.AdministratorID, (SelectList)ViewBag.Administrators, "Select an Administrator", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.AdministratorID)
+    </div>
+
+
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
